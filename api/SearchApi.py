@@ -1,3 +1,4 @@
+import allure
 import requests
 
 
@@ -8,6 +9,7 @@ class SearchApi:
         self.__api_key = api_key
         self.__query = test_data
 
+    @allure.step("Тест поиска по латинице через API.")
     def search_by_latin(self, search_req: str) -> dict:
         headers = {
             "X-API-KEY": self.__api_key
@@ -18,6 +20,7 @@ class SearchApi:
                             headers=headers)
         return resp.json()
 
+    @allure.step("Тест поиска по кириллице через API.")
     def search_by_cyrillic(self, search_req: str) -> dict:
         headers = {
             "X-API-KEY": self.__api_key
@@ -28,6 +31,7 @@ class SearchApi:
                             headers=headers)
         return resp.json()
 
+    @allure.step("Тест поиска по цифрам через API.")
     def search_by_numbers(self, search_req: str) -> dict:
         headers = {
             "X-API-KEY": self.__api_key
@@ -38,6 +42,7 @@ class SearchApi:
                             headers=headers)
         return resp.json()
 
+    @allure.step("Тест поиска по случайным буквам через API.")
     def search_by_arbitrary_set_of_letters(self, search_req: str) -> dict:
         headers = {
             "X-API-KEY": self.__api_key
@@ -48,6 +53,7 @@ class SearchApi:
                             headers=headers)
         return resp.json()
 
+    @allure.step("Тест поиска без токена через API.")
     def search_without_an_apikey(self, search_req: str):
         headers = {
             "X-API-KEY": ""
